@@ -15,17 +15,6 @@ namespace rvas_projekat.Controllers
 
         public IActionResult Index()
         {
-            Console.WriteLine("OKOKOKOK");
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-        public IActionResult Random()
-        {
-            Console.WriteLine("RANDOM");
             return View();
         }
 
