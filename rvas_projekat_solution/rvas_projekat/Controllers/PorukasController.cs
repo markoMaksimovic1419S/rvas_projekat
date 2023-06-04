@@ -45,45 +45,7 @@ namespace rvas_projekat.Controllers
                           Problem("Entity set 'rvas_projekatContext.Poruka'  is null.");
         }
 
-        // GET: Porukas/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Poruka == null)
-            {
-                return NotFound();
-            }
 
-            var poruka = await _context.Poruka
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (poruka == null)
-            {
-                return NotFound();
-            }
-
-            return View(poruka);
-        }
-
-        // GET: Porukas/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Porukas/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,poruku_poslao,text_poruke,id_sobe")] Poruka poruka)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(poruka);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(poruka);
-        }
 
         private bool PorukaExists(int id)
         {
