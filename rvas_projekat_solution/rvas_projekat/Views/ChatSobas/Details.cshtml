@@ -20,5 +20,57 @@
     </dl>
 </div>
 <div>
+    <hr />
+    <br />
+    <ul style="width: 600px; height:  200px; overflow-y: auto; border: 1px solid black;" id="lista_poruka">
+        @foreach (var item in ViewBag.Message)
+        {
+                <li><b>@item.poruku_poslao</b><br />@item.text_poruke</li>
+        }
+    </ul>
+    <br />
+
+    <form id="slanje_forma">
+        <input type="text" name="nova_poruka" placeholder="Vasa poruka" id="poruka_za_slanje" />
+        <input type="submit" name="posalji" id="dugmeSlanje" value="Posalji poruku" />
+        <input type="hidden" name="id_sobe" id="id_sobe" value="@Html.DisplayFor(model => model.id)" />
+    </form>
+</div>
+<div>
     <a asp-action="Index">Lista soba</a>
 </div>
+
+<script src="~/js/jquery.js"></script>
+<script src="~/js/signalr.js"></script>
+<script>
+
+    var konekcija = new signalR.HubConnectionBuilder()
+        .withUrl("/messages")
+        .build();
+    
+    konekcija.on("ReceiveMessage", function (poruka, user) {
+        var msg = poruka;
+        console.log(msg);
+        var dodavanje = " <li><b>" + user + "</b><br />" + poruka + "</li>";
+        $("#lista_poruka").prepend(dodavanje);
+        $("#poruka_text").val("");
+    });
+    konekcija.start().then(res => {
+        konekcija.invoke("SendMessageToAll", "konektovanje_u_sobu", $("#id_sobe").val()).catch(function (err) {
+            return console.error(err.toString());
+        });
+    }).catch(function (err) {
+        return console.error(err.toString());
+    });
+    
+    document.getElementById("dugmeSlanje").addEventListener("click", function (event) {
+        event.preventDefault();
+        var poruka = $("#poruka_za_slanje").val();
+        var id_sobe = $("#id_sobe").val();
+        konekcija.invoke("SendMessageToAll", poruka, id_sobe).catch(function (err) {
+            return console.error(err.toString());
+        });
+        $("#poruka_za_slanje").val("");
+    })
+
+</script>

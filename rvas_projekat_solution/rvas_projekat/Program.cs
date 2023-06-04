@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using poruke_namespace;
 using rvas_projekat.Areas.Identity.Data;
+using Microsoft.AspNetCore.SignalR;
+
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("rvas_projekatContextConnection") ?? throw new InvalidOperationException("Connection string 'rvas_projekatContextConnection' not found.");
 
@@ -12,6 +15,9 @@ builder.Services.AddDefaultIdentity<rvas_projekatUser>(options => options.SignIn
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHealthChecks();
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -27,13 +33,20 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication();;
+app.UseAuthentication();
 
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHub<MessageHub>("/messages");
+});
 
 app.MapRazorPages();
 app.Run();

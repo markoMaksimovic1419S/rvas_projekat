@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using rvas_projekat.Areas.Identity.Data;
 
@@ -11,9 +12,10 @@ using rvas_projekat.Areas.Identity.Data;
 namespace rvas_projekat.Migrations
 {
     [DbContext(typeof(rvas_projekatContext))]
-    partial class rvas_projekatContextModelSnapshot : ModelSnapshot
+    [Migration("20230604173015_PorukeMigracije")]
+    partial class PorukeMigracije
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -13,6 +13,7 @@ public class rvas_projekatContext : IdentityDbContext<rvas_projekatUser>
     {
     }
     public DbSet<rvas_projekat.Models.ChatSoba> ChatSoba { get; set; }
+    public DbSet<rvas_projekat.Models.Poruka>? Poruka { get; set; }
 
 
     // protected override void OnModelCreating(ModelBuilder builder)

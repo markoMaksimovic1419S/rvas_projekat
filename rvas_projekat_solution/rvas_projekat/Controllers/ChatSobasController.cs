@@ -33,18 +33,19 @@ namespace rvas_projekat.Controllers
         [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.ChatSoba == null)
+            if (id == null)
             {
                 return NotFound();
             }
- 
+
             var chatSoba = await _context.ChatSoba
                 .FirstOrDefaultAsync(m => m.id == id);
             if (chatSoba == null)
             {
                 return NotFound();
             }
- 
+
+            ViewBag.Message = _context.Poruka.Where(j => j.id_sobe == id).OrderByDescending(s => s.id).ToList();
             return View(chatSoba);
         }
  
