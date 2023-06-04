@@ -15,6 +15,7 @@ namespace rvas_projekat.Controllers
 
         public IActionResult Index()
         {
+            Console.WriteLine("OKOKOKOK");
             return View();
         }
 
@@ -22,6 +23,12 @@ namespace rvas_projekat.Controllers
         {
             return View();
         }
+        public IActionResult Random()
+        {
+            Console.WriteLine("RANDOM");
+            return View();
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
