@@ -1,14 +1,14 @@
 ﻿@model rvas_projekat.Models.ChatSoba
-
+ 
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Details</h1>
-
+ 
+<h1>Dobrodosli u chat sobu</h1>
+ 
 <div>
-    <h4>ChatSoba</h4>
+    <h4>Chat soba</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -17,15 +17,8 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.naziv_sobe)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.mail_kretora)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.mail_kretora)
-        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Lista soba</a>
 </div>
